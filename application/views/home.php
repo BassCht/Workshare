@@ -29,7 +29,7 @@
 				?>
 							<tr>
 								<td><?=$val->date_created;?></td>
-								<td><?=$val->username;?></td>
+								<td><a href="<?php echo base_url('account/detail?id=').$val->user_id ?>"><?=$val->username;?></a></td>
 								<td><?=$val->work_detail;?></td>
 								<td><?=$status;?></td>
 							</tr>

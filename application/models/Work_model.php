@@ -11,7 +11,7 @@ class Work_model extends CI_Model {
     }
 
     function get_work() {
-        $this->db->select('w.date_created, w.work_detail, w.status, u.username')
+        $this->db->select('w.user_id, w.date_created, w.work_detail, w.status, u.username')
         ->from('work w')
         ->join('users u', 'w.user_id = u.user_id')
         ->order_by('w.date_created', 'DESC');

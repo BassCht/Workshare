@@ -26,6 +26,15 @@ class Account extends CI_Controller {
         $data['userdata'] = $this->User_model->get_profile();
 		$this->load->view('account', $data);
     }
+    
+    public function detail(){
+        $data = array();
+        if(isset($_GET['id'])){
+            $user_id = $_GET['id'];
+            $data['userdata'] = $this->User_model->get_profile_by_id($user_id);
+        }
+        $this->load->view('account_by_id', $data);
+    }
 
     public function changepassword(){
         $this->subactive = 'changepass';

@@ -26,6 +26,15 @@ class User_model extends CI_Model {
         }
     } 
 
+    function get_profile_by_id($user_id) {
+        $this->db->select('*')->from('users')->where('user_id', $user_id);
+        $query = $this->db->get();
+
+        if ($query->result()) {
+            return $query->result();
+        }
+    } 
+
     function update_profile($data) {
         if ($this->db->where('user_id', $this->session->userdata('user_id'))->update('users', $data)) {
             return 1;
