@@ -46,7 +46,21 @@ class Account extends CI_Controller {
             $_SESSION['username'] = $username;
         }
 		echo $res;
-	}
+    }
+    
+    public function update_password(){
+        $checkOldPass = $this->User_model->check_old_pass($this->input->post('old_pass'));
+        if($checkOldPass != 0){
+            $data = array(
+                'date_modified' => $this->date,
+                'password' => $this->input->post('new_pass'),
+            );
+            $res = $this->User_model->update_profile($data);
+            echo $res;
+        }else{
+            echo 2;
+        }
+    }
     
     public function upload_profile_image() {
         $data = array();

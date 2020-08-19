@@ -33,4 +33,16 @@ class User_model extends CI_Model {
             return 0;
         }
     }  
+
+    function check_old_pass($old_pass) {
+        $this->db->select('*')->from('users')
+        ->where('user_id', $this->session->userdata('user_id'))
+        ->where('password', $old_pass);
+        $query = $this->db->get();
+        if ($query->result()) {
+            return 1;
+        } else {
+            return 0;
+        }
+    } 
 }

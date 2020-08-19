@@ -16,48 +16,55 @@
                 <div class="col-8 col-md-8">
                     <div class="profile col-content">
                         <h1>Change Password</h1>
-                          
-                        <button id="save" class="hidden">SAVE</button>
-                        <button id="cancel" class="hidden">CANCEL</button>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="old-pass" placeholder="Old Password">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="new-pass" placeholder="New Password">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="confirm-pass" placeholder="Confirm Password">
+                            </div>
+                            <button id="save" class="">SAVE</button>
+                            <button id="cancel" class="" onclick="goToHome()">CANCEL</button>
                     </div>
                 </div>
             </div>
 		</div>
 		<?php include 'foot.php'; ?>
         <script>
-            // $("#save").on( "click", function() {
-            //     var username = $('.data-input.username').val();
-            //     var fullname = $('.data-input.fullname').val();
-            //     var tel = $('.data-input.tel').val();
-            //     $.ajax({
-            //         method: "POST",
-            //         url: '<?php echo base_url("account/update_profile/")?>',
-            //         data: { 
-            //             username: username,
-            //             fullname: fullname,
-            //             tel: tel,
-            //         },
-            //         dataType: "json"
-            //     }).done(function(data) {
-            //         // console.log("Return data :", data);
-            //         if(data != 0){
-            //             $('.data-txt.username').text(username);
-            //             $('.data-txt.fullname').text(fullname);
-            //             $('.data-txt.tel').text(tel);
-            //             $('.data-input.username').val(username);
-            //             $('.data-input.fullname').val(fullname);
-            //             $('.data-input.tel').val(tel);
+            function goToHome() {
+                location.href = '<?php echo base_url('account')?>';
+            }
+            $("#save").on( "click", function() {
+                var old_pass = $('#old-pass').val();
+                var new_pass = $('#new-pass').val();
+                var confirm_pass = $('#confirm-pass').val();
 
-            //             $('#save').addClass('hidden');
-            //             $('#cancel').addClass('hidden');
-            //             $("#edit-profile").removeClass('hidden');
-            //             $('.data-txt').removeClass('hidden');
-            //             $('.data-input').addClass('hidden');
-            //         }else{
-            //             alert('เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
-            //         }
-            //     });
-            // });
+                if(new_pass != confirm_pass){
+                    $.notify("รหัสผ่านไม่ตรงกัน", "error");
+                }else{
+                    $.ajax({
+                        method: "POST",
+                        url: '<?php echo base_url("account/update_password/")?>',
+                        data: { 
+                            old_pass: old_pass,
+                            new_pass: new_pass
+                        },
+                        dataType: "json"
+                    }).done(function(data) {
+                        console.log("Return data :", data);
+                        if(data == 1){
+                            $.notify("เปลี่ยนรหัสผ่านเรียบร้อย", "success");
+                            $('.profile input').val('');
+                        }else if(data == 2) {
+                            $.notify("รหัสผ่านเดิมไม่ถูกต้อง", "error");
+                        } else {
+                            $.notify("เกิดข้อผิดพลาดในการอัพเดทข้อมูล", "error");
+                        }
+                    });
+                }
+            });
         </script> 
 	</body>
 </html>
