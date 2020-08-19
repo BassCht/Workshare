@@ -4,14 +4,14 @@
             <a class="nav-link" href="<?php echo base_url(); ?>">home</a>
         </li>
         <?php if(isset($_SESSION['user_id'])) { ?>
-        <li class="nav-item <?php echo $this->active == 'account' ? "active" : '' ?>">
-            <a class="nav-link" href="<?php echo base_url('account'); ?>">profile</a>
-        </li>
         <li class="nav-item <?php echo $this->active == 'addwork' ? "active" : '' ?>">
             <a class="nav-link" href="<?php echo base_url('work'); ?>">add work</a>
         </li>
         <li class="nav-item <?php echo $this->active == 'updatework' ? "active" : '' ?>">
-            <a class="nav-link" href="<?php echo base_url('work/update'); ?>">update</a>
+            <a class="nav-link" href="<?php echo base_url('work/update'); ?>">update work</a>
+        </li>
+        <li class="nav-item <?php echo $this->active == 'account' ? "active" : '' ?>">
+            <a class="nav-link" href="<?php echo base_url('account'); ?>">profile</a>
         </li>
         <?php } ?>
     </ul>
