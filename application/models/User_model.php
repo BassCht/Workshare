@@ -35,6 +35,12 @@ class User_model extends CI_Model {
         }
     } 
 
+    function get_prfile_img() {
+        $this->db->select('img_name')->from('users')->where('user_id', $this->session->userdata('user_id'));
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     function update_profile($data) {
         if ($this->db->where('user_id', $this->session->userdata('user_id'))->update('users', $data)) {
             return 1;

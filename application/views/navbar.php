@@ -26,7 +26,7 @@
         </li>
         <?php } else { ?>
         <li class="nav-item">
-            Welcome <b id="nav-username"><?php echo $_SESSION['username'];?></b>
+           <img id="nav-user-img"><b id="nav-username"><?php echo $_SESSION['username'];?></b>
         </li>
         <li class="nav-item">
             <a class="nav-link logout" href="<?php echo base_url('login/logout'); ?>">logout</a>

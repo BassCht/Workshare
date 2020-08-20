@@ -164,6 +164,7 @@
                                 if(data == 'done'){
                                     html = '<img src="' + img + '" />';
                                     $("#preview-crop-image").html(html);
+                                    $('#nav-user-img').attr('src', img);
                                     $.notify("อัพเดทรูปภาพเรียบร้อย", "success");
                                     $('#user-img').addClass('hidden');
                                     $('#preview-crop-image').removeClass('hidden');

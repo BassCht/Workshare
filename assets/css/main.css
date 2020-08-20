@@ -107,6 +107,12 @@ tr:nth-child(even) {
     justify-content: space-between;
 }
 
+#nav-user-img {
+    width: 24px;
+    height: auto;
+    margin-right: 10px;
+}
+
 .centered {
     display: flex;
     width: 100%;
