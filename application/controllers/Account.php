@@ -71,30 +71,53 @@ class Account extends CI_Controller {
         }
     }
     
-    public function upload_profile_image() {
-        $data = array();
-        $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = 'jpg|png';
-        $config['file_name'] = 'img-'.time().$this->randomString();
-        $config['max_size'] = 5000;
-        $config['max_width'] = 2400;
-        $config['max_height'] = 2400;
+    // public function upload_profile_image() {
+    //     $data = array();
+    //     $config['upload_path'] = './uploads/';
+    //     $config['allowed_types'] = 'jpg|png';
+    //     $config['file_name'] = 'img-'.time().$this->randomString();
+    //     $config['max_size'] = 5000;
+    //     $config['max_width'] = 2400;
+    //     $config['max_height'] = 2400;
         
-        $this->load->library('upload', $config);
-        if (!$this->upload->do_upload('userfile')) {
-            $data['error'] = $this->upload->display_errors();
-        } else {
-            $upload_data = $this->upload->data(); 
+    //     $this->load->library('upload', $config);
+    //     if (!$this->upload->do_upload('userfile')) {
+    //         $data['error'] = $this->upload->display_errors();
+    //     } else {
+    //         $upload_data = $this->upload->data(); 
+    //         $profile_data = array(
+    //             'date_modified' => $this->date,
+    //             'img_name' => $upload_data['file_name']
+    //         );
+    //         if($this->User_model->update_profile($profile_data) != 0){
+    //             $data['done'] = $this->upload->data();
+    //         }else{
+    //             $data['error'] = 'Can not update file name to database';
+    //         }
+    //     }
+    //     echo json_encode($data);
+    // }
+
+    public function upload_crop_image() {
+        $image = $_POST['image'];
+        list($type, $image) = explode(';',$image);
+        list(, $image) = explode(',',$image);
+
+        $image = base64_decode($image);
+        $image_name = 'img-'.time().$this->randomString().'.png';
+        if (file_put_contents('uploads/'.$image_name, $image) ) {
             $profile_data = array(
                 'date_modified' => $this->date,
-                'img_name' => $upload_data['file_name']
+                'img_name' => $image_name
             );
             if($this->User_model->update_profile($profile_data) != 0){
-                $data['done'] = $this->upload->data();
+                echo 'done';
             }else{
-                $data['error'] = 'Can not update file name to database';
+                echo 'error';
             }
+        }else{
+            echo 'error';
         }
-        echo json_encode($data);
     }
+
 }
