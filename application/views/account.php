@@ -172,13 +172,7 @@
 
                                     $('#uploadModal #image').val('');
                                     $('#upload-demo').croppie('destroy');
-                                    createCroppie()
-                                    
-                                    resize.croppie('bind', {
-                                        url : ''
-                                    }).then(function () {
-                                        console.log('reset complete');
-                                    });
+                                    createCroppie();
                                 }else{
                                     $.notify("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง", "error");
                                 }
