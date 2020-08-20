@@ -182,22 +182,6 @@
                 });
             });
 
-            $("#edit-profile").on( "click", function() {
-                $('.data-txt').addClass('hidden');
-                $('.data-input').removeClass('hidden');
-                $(this).addClass('hidden');
-                $('#save').removeClass('hidden');
-                $('#cancel').removeClass('hidden');
-            });
-
-            $("#cancel").on( "click", function() {
-                $(this).addClass('hidden');
-                $('#save').addClass('hidden');
-                $("#edit-profile").removeClass('hidden');
-                $('.data-txt').removeClass('hidden');
-                $('.data-input').addClass('hidden');
-            });
-            
             $("#save").on( "click", function() {
                 var username = $('.data-input.username').val();
                 var fullname = $('.data-input.fullname').val();
@@ -232,6 +216,28 @@
                         $.notify("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง", "error");
                     }
                 });
+            });
+            
+            $("#uploadModal .close").on( "click", function() {
+                $('#uploadModal #image').val('');
+                $('#upload-demo').croppie('destroy');
+                createCroppie();
+            });
+
+            $("#edit-profile").on( "click", function() {
+                $('.data-txt').addClass('hidden');
+                $('.data-input').removeClass('hidden');
+                $(this).addClass('hidden');
+                $('#save').removeClass('hidden');
+                $('#cancel').removeClass('hidden');
+            });
+
+            $("#cancel").on( "click", function() {
+                $(this).addClass('hidden');
+                $('#save').addClass('hidden');
+                $("#edit-profile").removeClass('hidden');
+                $('.data-txt').removeClass('hidden');
+                $('.data-input').addClass('hidden');
             });
 
             $("#edit-img").on( "click", function() {
